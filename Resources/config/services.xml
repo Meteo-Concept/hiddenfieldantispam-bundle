@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services
+    http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <defaults autowire="false" autoconfigure="false" public="false">
+        </defaults>
+
+        <service id="meteo_concept_hidden_field_antispam.form_extension"
+            class="MeteoConcept\HiddenFieldAntispamBundle\Form\Extension\HiddenFieldAntispamExtension"
+            public="true">
+            <argument type="boolean"></argument> <!-- enabled -->
+            <argument type="string"></argument> <!-- fieldName -->
+            <argument type="service" id="Symfony\Contracts\Translation\TranslatorInterface"/>
+            <argument type="string"></argument> <!-- translation domain -->
+        </service>
+
+        <service id="MeteoConcept\HiddenFieldAntispamBundle\Form\Extension\HiddenFieldAntispamExtension"
+            alias="meteo_concept_hidden_field_antispam.form_extension"
+            public="false">
+        </service>
+    </services>
+</container>
