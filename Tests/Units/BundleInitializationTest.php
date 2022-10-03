@@ -5,7 +5,6 @@ namespace MeteoConcept\HiddenFieldAntispamBundle\Tests\Units;
 use Nyholm\BundleTest\BaseBundleTestCase;
 
 use MeteoConcept\HiddenFieldAntispamBundle\MeteoConceptHiddenFieldAntispamBundle;
-use MeteoConcept\HiddenFieldAntispamBundle\Form\HiddenFieldAntispamType;
 
 class BundleInitializationTest extends BaseBundleTestCase
 {
@@ -17,7 +16,7 @@ class BundleInitializationTest extends BaseBundleTestCase
     public function setUp(): void
     {
         $kernel = $this->createKernel();
-        $kernel->addConfigFile(__DIR__.'/test_config.yml');
+        //$kernel->addConfigFile(__DIR__.'/test_config.yml');
         $this->bootKernel();
     }
 

@@ -2,10 +2,10 @@
 
 namespace MeteoConcept\HiddenFieldAntispamBundle\Form\Extension\Type;
 
+use MeteoConcept\HiddenFieldAntispamBundle\Form\Extension\EventListener\HiddenFieldAntispamListener;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-use Symfony\Component\Form\Extension\EventListener\HiddenFieldAntispamListener;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
@@ -18,13 +18,14 @@ class FormTypeHiddenFieldAntispamExtension extends AbstractTypeExtension
 
     private string $fieldName;
 
-    private TranslatorInterface $translator;
+    private ?TranslatorInterface $translator;
 
-    private string $translationDomain;
+    private ?string $translationDomain;
 
-    public function __construct(string $fieldName,
-        TranslatorInterface $translator = null, string $translationDomain = null)
+    public function __construct(bool $enabled, string $fieldName,
+        ?TranslatorInterface $translator = null, ?string $translationDomain = null)
     {
+        $this->enabled = $enabled;
         $this->fieldName = $fieldName;
         $this->translator = $translator;
         $this->translationDomain = $translationDomain;
@@ -42,8 +43,9 @@ class FormTypeHiddenFieldAntispamExtension extends AbstractTypeExtension
         $builder
             ->addEventSubscriber(new HiddenFieldAntispamListener(
                 $options['hidden_field_antispam_field_name'],
-                $translator,
-                $translationDomain
+                $options['hidden_field_antispam_message'],
+                $this->translator,
+                $this->translationDomain
             ))
         ;
     }
@@ -72,7 +74,7 @@ class FormTypeHiddenFieldAntispamExtension extends AbstractTypeExtension
     {
         $resolver->setDefaults([
             'hidden_field_antispam_enabled' => $this->enabled,
-            'hidden_field_antispam_field_name' => $this->defaultFieldName,
+            'hidden_field_antispam_field_name' => $this->fieldName,
             'hidden_field_antispam_message' => 'The hidden antispam field is filled-in. Please try to resubmit the form.',
         ]);
     }

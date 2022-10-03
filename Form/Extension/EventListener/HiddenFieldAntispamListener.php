@@ -10,10 +10,10 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class HiddenFieldAntispamListener implements EventSubscriberInterface
 {
-    private $fieldName;
-    private $errorMessage;
-    private $translator;
-    private $translationDomain;
+    private string $fieldName;
+    private string $errorMessage;
+    private ?TranslatorInterface $translator;
+    private ?string $translationDomain;
 
     public static function getSubscribedEvents()
     {
@@ -22,7 +22,7 @@ class HiddenFieldAntispamListener implements EventSubscriberInterface
         ];
     }
 
-    public function __construct(string $fieldName, string $errorMessage, TranslatorInterface $translator = null, string $translationDomain = null)
+    public function __construct(string $fieldName, string $errorMessage, ?TranslatorInterface $translator = null, ?string $translationDomain = null)
     {
         $this->fieldName = $fieldName;
         $this->errorMessage = $errorMessage;

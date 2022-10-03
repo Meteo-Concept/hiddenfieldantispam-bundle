@@ -1,0 +1,22 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    MeteoConcept\HiddenFieldAntispamBundle\Tests\Functional\BasicController:
+        tags: ['controller.service_arguments']
+
+# use the default config for the HiddenFieldAntispam bundle
+
+framework:
+    secret: test
+    test: true
+    session:
+        storage_factory_id: session.storage.factory.mock_file
+    router:
+        utf8: true
+        resource: '%kernel.project_dir%/Tests/Functional/test_routes.yaml'
+    profiler: { enabled: true, collect: true }
+
+twig:
+    default_path: '%kernel.project_dir%/Tests/Functional/templates'

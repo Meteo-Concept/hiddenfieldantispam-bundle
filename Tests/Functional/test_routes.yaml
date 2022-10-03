@@ -1,0 +1,8 @@
+default:
+    path: '/form'
+    controller: MeteoConcept\HiddenFieldAntispamBundle\Tests\Functional\BasicController::form
+
+ok:
+    path: '/ok/{value}'
+    controller: MeteoConcept\HiddenFieldAntispamBundle\Tests\Functional\BasicController::ok
+

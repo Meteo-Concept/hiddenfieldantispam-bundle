@@ -8,17 +8,18 @@
         <defaults autowire="false" autoconfigure="false" public="false">
         </defaults>
 
-        <service id="meteo_concept_hidden_field_antispam.form_extension"
-            class="MeteoConcept\HiddenFieldAntispamBundle\Form\Extension\HiddenFieldAntispamExtension"
+        <service id="meteo_concept_hidden_field_antispam.form_type_extension"
+            class="MeteoConcept\HiddenFieldAntispamBundle\Form\Extension\Type\FormTypeHiddenFieldAntispamExtension"
             public="true">
-            <argument type="boolean"></argument> <!-- enabled -->
+            <argument type="string"></argument> <!-- enabled -->
             <argument type="string"></argument> <!-- fieldName -->
-            <argument type="service" id="Symfony\Contracts\Translation\TranslatorInterface"/>
-            <argument type="string"></argument> <!-- translation domain -->
+            <argument type="service" id="translator" on-invalid="null"/>
+            <argument type="string">meteo_concept_hidden_field_antispam</argument> <!-- translation domain -->
+            <tag name="form.type_extension"/>
         </service>
 
-        <service id="MeteoConcept\HiddenFieldAntispamBundle\Form\Extension\HiddenFieldAntispamExtension"
-            alias="meteo_concept_hidden_field_antispam.form_extension"
+        <service id="MeteoConcept\HiddenFieldAntispamBundle\Form\Extension\Type\FormTypeHiddenFieldAntispamExtension"
+            alias="meteo_concept_hidden_field_antispam.form_type_extension"
             public="false">
         </service>
     </services>

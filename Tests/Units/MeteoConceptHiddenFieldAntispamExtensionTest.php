@@ -22,15 +22,15 @@ class MeteoConceptHiddenFieldAntispamExtensionTest extends AbstractExtensionTest
         ];
     }
 
-    public function test_the form_extension_definition_is_passed_the_enabled_configuration_value()
+    public function test_the_form_extension_definition_is_passed_the_enabled_configuration_value()
     {
         $this->load();
-        $this->assertContainerBuilderHasServiceDefinitionWithArgument('meteo_concept_hidden_field_antispam.form_extension', 0, true);
+        $this->assertContainerBuilderHasServiceDefinitionWithArgument('meteo_concept_hidden_field_antispam.form_type_extension', 0, true);
     }
 
-    public function test_the form_extension_definition_is_passed_the_field_name()
+    public function test_the_form_extension_definition_is_passed_the_field_name()
     {
         $this->load();
-        $this->assertContainerBuilderHasServiceDefinitionWithArgument('meteo_concept_hidden_field_antispam.form_extension', 1, "field");
+        $this->assertContainerBuilderHasServiceDefinitionWithArgument('meteo_concept_hidden_field_antispam.form_type_extension', 1, "field");
     }
 }
