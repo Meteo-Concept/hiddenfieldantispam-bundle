@@ -56,3 +56,10 @@ Usage
 
 You have nothing else to do, the field is automatically added to all root (i.e.
 non-embedded forms).
+
+
+Todo
+----
+
+* Randomize the field name, just in case bots would become smart
+* More advanced, randomize the field type while leaving it invisible

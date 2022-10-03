@@ -12,6 +12,9 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
  */
 class MeteoConceptHiddenFieldAntispamExtension extends Extension
 {
+    /**
+     * {@inheritDoc}
+     */
     public function load(array $configs, ContainerBuilder $container)
     {
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
@@ -26,6 +29,9 @@ class MeteoConceptHiddenFieldAntispamExtension extends Extension
         $validator->replaceArgument(1, $config['field_name']);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getNamespace(): string
     {
         return 'http://www.meteo-concept.fr/schema/dic/hiddenfieldantispam';

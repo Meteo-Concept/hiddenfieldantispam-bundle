@@ -12,16 +12,42 @@ use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
+/**
+ * A type extension for base (also called "root") forms
+ *
+ * This type extension injects an antispam hidden field into every root forms (i.e. forms that are not fields or
+ * fragments of another enclosing form). The field has an empty value and must come back empty as well, otherwise, it's
+ * the sign that a bot has submitted the form instead of a real human visitor.
+ */
 class FormTypeHiddenFieldAntispamExtension extends AbstractTypeExtension
 {
+    /**
+     * @var string|bool $enabled Whether the antispam mechanism is enabled
+     */
     private string $enabled;
 
+    /**
+     * @var string $fieldName The name of the field to inject
+     */
     private string $fieldName;
 
+    /**
+     * @var TranslatorInterface|null $translator A translator service for the error message
+     */
     private ?TranslatorInterface $translator;
 
+    /**
+     * @var string|null $translationDomain The translation domain of the bundle
+     */
     private ?string $translationDomain;
 
+    /**
+     * Constructs the type extension
+     * @param bool $enabled Whether to enable the whole antispam mechanism
+     * @param string $fieldName The name of the field to inject
+     * @param TranslatorInterface|null $translator A translator service
+     * @param string|null $translationDomain The bundle translation domain
+     */
     public function __construct(bool $enabled, string $fieldName,
         ?TranslatorInterface $translator = null, ?string $translationDomain = null)
     {
@@ -32,7 +58,7 @@ class FormTypeHiddenFieldAntispamExtension extends AbstractTypeExtension
     }
 
     /**
-     * Adds a CSRF field to the form when the CSRF protection is enabled.
+     * Adds the listener to the form to check the antispam field when the form is submitted
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -51,7 +77,7 @@ class FormTypeHiddenFieldAntispamExtension extends AbstractTypeExtension
     }
 
     /**
-     * Adds a hidden field to the root form view.
+     * Adds the hidden antispam field to the root form view
      */
     public function finishView(FormView $view, FormInterface $form, array $options)
     {
