@@ -15,7 +15,7 @@ class HiddenFieldAntispamListener implements EventSubscriberInterface
     private ?TranslatorInterface $translator;
     private ?string $translationDomain;
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             FormEvents::PRE_SUBMIT => 'preSubmit',
@@ -46,7 +46,7 @@ class HiddenFieldAntispamListener implements EventSubscriberInterface
                     $errorMessage = $this->translator->trans($errorMessage, [], $this->translationDomain);
                 }
 
-                $form->addError(new FormError($errorMessage, $errorMessage, [], null, ""));
+                $form->addError(new FormError($errorMessage, $errorMessage, [], null, "antispam security measure"));
             }
 
             if (\is_array($data)) {
