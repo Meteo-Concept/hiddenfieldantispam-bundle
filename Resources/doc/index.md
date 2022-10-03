@@ -1,4 +1,4 @@
-Hidden-field-based antispam bundle for Symfony 5+ [![Build Status v1](https://api.travis-ci.com/Meteo-Concept/hiddenfieldantispam-bundle.svg?branch=master)](https://api.travis-ci.com/Meteo-Concept/hiddenfieldantispam-bundle.svg?branch=master)
+Hidden-field-based antispam bundle for Symfony 5+ [![Build Status v1](https://api.travis-ci.com/Meteo-Concept/hiddenfieldantispam-bundle.svg?branch=main)](https://api.travis-ci.com/Meteo-Concept/hiddenfieldantispam-bundle.svg?branch=main)
 ============
 
 This bundle adds into each form a hidden field with an empty value.
