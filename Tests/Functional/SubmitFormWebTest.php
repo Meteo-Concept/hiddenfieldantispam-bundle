@@ -25,7 +25,7 @@ class SubmitFormWebTest extends PantherTestCase
 
         $crawler = $client->request('GET', '/form');
         $client->waitFor("form");
-        $this->assertSelectorExists('input[name="form[meteo_concept_sentinel]"]');
+        $this->assertSelectorExists('select[name="form[meteo_concept_sentinel]"]');
     }
 
     public function testSuccessfulEmptyValueIsHandledCorrectly()
@@ -61,7 +61,7 @@ class SubmitFormWebTest extends PantherTestCase
 
         $client->switchTo()->defaultContent();
         $form = $crawler->selectButton('form_submit')->form();
-        $client->executeScript("document.querySelector('input[name=\"form[meteo_concept_sentinel]\"]').value = 'Should not be there!';");
+        $client->executeScript("document.querySelector('select[name=\"form[meteo_concept_sentinel]\"] option:last-child').selected = true;");
         $client->submit($form, [
             'form[witness]' => 'test',
         ]);
