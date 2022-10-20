@@ -1,0 +1,15 @@
+{% block hidden_field_antispam_widget  %}
+    <select id="{{ form.vars.id }}" name="{{ form.vars.full_name }}">
+        <option value="" selected>{{ form.vars.placeholder }}</option>
+        {% for index, choice in form.vars.choices %}
+            <option value="{{ choice.value }}">{{ choice.label }}</option>
+        {% endfor %}
+    </select>
+{% endblock %}
+
+{% block hidden_field_antispam_row %}
+    <label style="display: none;">
+        {{ form.vars.label }}
+        {{ form_widget(form) }}
+    </label>
+{% endblock %}

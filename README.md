@@ -49,6 +49,10 @@ Configure the bundle, for instance in
 meteo_concept_hidden_field_antispam:
     enabled: true # this is the default
     field_name: "meteo_concept_sentinel" # this is the default
+
+twig:
+    form_themes:
+        - '@MeteoConceptHiddenFieldAntispam/hidden_field_antispam_form.html.twig' # to hide the antispam field
 ```
 
 Usage

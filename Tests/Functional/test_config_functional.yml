@@ -20,3 +20,5 @@ framework:
 
 twig:
     default_path: '%kernel.project_dir%/Tests/Functional/templates'
+    form_themes:
+        - '@MeteoConceptHiddenFieldAntispam/hidden_field_antispam_form.html.twig'

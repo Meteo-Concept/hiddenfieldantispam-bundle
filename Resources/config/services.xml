@@ -22,5 +22,16 @@
             alias="meteo_concept_hidden_field_antispam.form_type_extension"
             public="false">
         </service>
+
+        <service id="meteo_concept_hidden_field_antispam.hidden_field_antispam_form_type"
+            class="MeteoConcept\HiddenFieldAntispamBundle\Form\Type\HiddenFieldAntispamType"
+            public="true">
+            <tag name="form.type" alias="hidden_field_antispam"/>
+        </service>
+
+        <service id="MeteoConcept\HiddenFieldAntispamBundle\Form\Type\HiddenFieldAntispamType"
+            alias="meteo_concept_hidden_field_antispam.hidden_field_antispam_form_type"
+            public="false">
+        </service>
     </services>
 </container>

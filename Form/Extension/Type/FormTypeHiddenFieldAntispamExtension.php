@@ -3,8 +3,8 @@
 namespace MeteoConcept\HiddenFieldAntispamBundle\Form\Extension\Type;
 
 use MeteoConcept\HiddenFieldAntispamBundle\Form\Extension\EventListener\HiddenFieldAntispamListener;
+use MeteoConcept\HiddenFieldAntispamBundle\Form\Type\HiddenFieldAntispamType;
 use Symfony\Component\Form\AbstractTypeExtension;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -84,15 +84,7 @@ class FormTypeHiddenFieldAntispamExtension extends AbstractTypeExtension
         if ($options['hidden_field_antispam_enabled'] && !$view->parent && $options['compound']) {
             $factory = $form->getConfig()->getFormFactory();
 
-            $hiddenFieldForm = $factory->createNamed($options['hidden_field_antispam_field_name'], ChoiceType::class, NULL, [
-                'block_prefix' => 'hidden_field_antispam',
-                'mapped' => false,
-                'choices' => array_map(fn ($k) => substr(base64_encode(random_bytes(20 * $k)), 1, $k), range(rand(5, 10), rand(11, 21))),
-                'row_attr' => ['style' => 'display: none;'],
-                'placeholder' => "please choose a token",
-                'empty_data' => NULL,
-                'required' => false,
-            ]);
+            $hiddenFieldForm = $factory->createNamed($options['hidden_field_antispam_field_name'], HiddenFieldAntispamType::class);
 
             $view->children[$options['hidden_field_antispam_field_name']] = $hiddenFieldForm->createView($view);
         }
