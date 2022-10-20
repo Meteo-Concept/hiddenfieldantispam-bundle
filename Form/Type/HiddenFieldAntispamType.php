@@ -3,24 +3,36 @@
 namespace MeteoConcept\HiddenFieldAntispamBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class HiddenFieldAntispamType extends AbstractType
 {
+    /**
+     * {@inheritDoc}
+     */
     public function getBlockPrefix(): string
     {
         return "hidden_field_antispam";
     }
 
-    public function getParent(): ?string
+    /**
+     * {@inheritDoc}
+     */
+    public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        // Take TextareaType as the parent because the hCaptcha widget kind of
-        // takes up the same amount of space in a form (it's a rectangular box...)
-        // so maybe this is a good default for layout?
-        return ChoiceType::class;
+        $view->vars['placeholder'] = $options['placeholder'];
+        $choices = [];
+        foreach ($options['choices'] as $k => $v) {
+            $choices[] = ['label' => $k, 'value' => $v];
+        }
+        $view->vars['choices'] = $choices;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
